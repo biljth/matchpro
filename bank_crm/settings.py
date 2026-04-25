@@ -28,7 +28,10 @@ SECRET_KEY = 'django-insecure-y0ujns*d@8t*b5w%jc#*!$ql!hm*v7yrz$)=wwe=1wj&cc9byb
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['.onrender.com']
+ALLOWED_HOSTS = ['.onrender.com',
+                'matchpro.id',
+                'www.matchpro.id',
+                ]
 
 
 # Application definition
