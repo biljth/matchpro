@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{% block title %}Auth{% endblock %}</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #0b5ed7, #1e88e5);
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .auth-box {
+            background: #fff;
+            padding: 40px;
+            width: 360px;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            text-align: center;
+        }
+
+        h2 {
+            margin-bottom: 22px;
+            color: #306fcd;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 14px;
+            outline: none;
+        }
+
+        input:focus {
+            border-color: #0b5ed7;
+            box-shadow: 0 0 5px rgba(11, 94, 215, 0.3);
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            background: #0b5ed7;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 15px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        button:hover {
+            background: #084db3;
+        }
+
+        .error {
+            color: red;
+            font-size: 13px;
+            margin-bottom: 10px;
+        }
+
+        .logo {
+            font-size: 27px;
+            font-weight: bold;
+            color: #0b5ed7;
+            margin-bottom: 10px;
+        }
+
+        .btn {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            margin: 10px 0;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .btn-personal {
+            background: #4CAF50;
+            color: white;
+        }
+
+        .btn-personal:hover {
+            background: #45a049;
+        }
+
+        .btn-company {
+            background: #007bff;
+            color: white;
+        }
+
+        .btn-company:hover {
+            background: #0069d9;
+        }
+
+    </style>
+
+    {% block extra_css %}{% endblock %}
+</head>
+
+<body>
+
+    <div class="auth-box">
+        {% block content %}{% endblock %}
+    </div>
+
+</body>
+</html>

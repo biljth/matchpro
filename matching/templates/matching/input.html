@@ -1,0 +1,57 @@
+{% extends 'matching/base.html' %}
+{% load humanize %}
+
+{% block title %}Input Client{% endblock %}
+
+{% block content %}
+    <div style="display:flex; justify-content:space-between; margin-bottom:15px;">
+        <a href="{% url 'choose_type' %}" class="btn-back">← Back</a>
+
+        <a href="{% url 'history' %}" class="btn-back">
+            📜 History
+        </a>
+    </div>
+    <!-- FORM -->
+    <div class="form-card">
+        <h3>Input Data</h3>
+
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Cari Bank</button>
+        </form>
+    </div>
+
+    <!-- RESULTS -->
+    {% if results %}
+        <h3>Hasil Rekomendasi</h3>
+
+        {% for r in results %}
+            <div class="result-card">
+                <div class="bank-name">{{ r.bank }}{% if r.is_pks %}
+                        <span class="pks-badge"> (PKS)</span>
+                    {% endif %}</div>
+
+                <div class="score">
+                    Score: {{ r.score }}
+                </div>
+
+                <ul>
+                    {% for reason in r.reasons %}
+                        <li>{{ reason }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endfor %}
+    {% endif %}
+
+    {% if results %}
+        <form method="POST" action="{% url 'save_history' %}">
+            {% csrf_token %}
+            <button type="submit" style="margin-top:20px; background:#28a745;">
+                Save & View History
+            </button>
+        </form>
+    {% endif %}
+
+{% endblock %}

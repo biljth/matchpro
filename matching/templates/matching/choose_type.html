@@ -1,0 +1,25 @@
+{% extends "matching/base_auth.html" %}
+
+{% block title %}Pilih Tipe Client{% endblock %}
+
+{% block content %}
+
+<h2>Pilih Tipe Client</h2>
+
+<p style="color:#666; font-size:14px;">
+    Pilih jenis nasabah untuk mulai proses matching
+</p>
+
+<form method="POST">
+    {% csrf_token %}
+
+    <button type="submit" name="tipe_client" value="PERORANGAN" class="btn btn-personal">
+        👤 Perorangan
+    </button>
+
+    <button type="submit" name="tipe_client" value="PERUSAHAAN" class="btn btn-company">
+        🏢 Perusahaan
+    </button>
+</form>
+
+{% endblock %}

@@ -1,0 +1,121 @@
+{% extends "matching/base.html" %}
+{% load humanize %}
+
+{% block title %}History Detail{% endblock %}
+
+{% block content %}
+
+<a class="btn-back" href="{% url 'history' %}">← Back</a>
+
+<div class="box">
+    <div class="title">Detail Lengkap</div>
+
+    {% if h.nama %}
+        <p>Nama: {{ h.nama }}</p>
+    {% endif %}
+
+    {% if h.umur and h.umur != 0 %}
+        <p>Umur: {{ h.umur }} tahun</p>
+    {% endif %}
+
+    {% if h.get_jenis_kelamin_display %}
+        <p>Jenis Kelamin: {{ h.get_jenis_kelamin_display }}</p>
+    {% endif %}
+
+    {% if h.get_tipe_client_display %}
+        <p>Tipe Client: {{ h.get_tipe_client_display }}</p>
+    {% endif %}
+
+    {% if h.get_jenis_pinjaman_display %}
+        <p>Jenis Pinjaman: {{ h.get_jenis_pinjaman_display }}</p>
+    {% endif %}
+
+    {% if h.jumlah_pinjaman %}
+        <p>Jumlah Pinjaman: Rp {{ h.jumlah_pinjaman|intcomma }}</p>
+    {% endif %}
+
+    {% if h.tenor %}
+        <p>Tenor: {{ h.tenor }} bulan</p>
+    {% endif %}
+
+    {% if h.get_pekerjaan_display %}
+        <p>Pekerjaan: {{ h.get_pekerjaan_display }}</p>
+    {% endif %}
+
+    {% if h.get_status_pekerjaan_display %}
+        <p>Status Pekerjaan: {{ h.get_status_pekerjaan_display }}</p>
+    {% endif %}
+
+    {% if h.get_bentuk_perusahaan_display %}
+        <p>Bentuk Perusahaan: {{ h.get_bentuk_perusahaan_display }}</p>
+    {% endif %}
+
+    {% if h.get_bidang_usaha_display %}
+        <p>Bidang Usaha: {{ h.get_bidang_usaha_display }}</p>
+    {% endif %}
+
+    {% if h.get_jaminan_display %}
+        <p>Jaminan: {{ h.get_jaminan_display }}</p>
+    {% endif %}
+
+    {% if h.get_sumber_penghasilan_display %}
+        <p>Sumber Penghasilan: {{ h.get_sumber_penghasilan_display }}</p>
+    {% endif %}
+
+    {% if h.get_status_slik_display %}
+        <p>SLIK: {{ h.get_status_slik_display }}</p>
+    {% endif %}
+
+    {% if h.get_join_income_display %}
+        <p>Join Income: {{ h.get_join_income_display }}</p>
+    {% endif %}
+</div>
+
+<div class="box">
+    <div class="title">Results</div>
+
+    {% if h.results %}
+        {% for r in h.results %}
+            <div class="result-card">
+
+                <div class="bank-name">
+                    {{ r.bank }}
+                    {% if r.is_pks %}
+                        <span class="pks-badge">(PKS)</span>
+                    {% endif %}
+                </div>
+
+                <div class="score">
+                    Score: {{ r.score }}
+                </div>
+
+                <ul class="reasons-list">
+                    {% for reason in r.reasons %}
+                        <li class="
+                            {% if '❌' in reason %}fail
+                            {% elif '⚠' in reason %}warn
+                            {% else %}success{% endif %}
+                        ">
+                            {{ reason }}
+                        </li>
+                    {% endfor %}
+                </ul>
+
+            </div>
+        {% endfor %}
+    {% else %}
+        <p style="color: gray;">No results available.</p>
+    {% endif %}
+</div>
+
+<div style="margin-top: 15px;">
+    <a class="delete" href="{% url 'delete_history' h.id %}">
+        Delete
+    </a>
+
+    <a class="btn-back" href="{% url 'download_history_pdf' h.id %}">
+        ⬇ Download PDF
+    </a>
+</div>
+
+{% endblock %}

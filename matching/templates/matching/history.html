@@ -1,0 +1,41 @@
+{% extends "matching/base.html" %}
+
+{% block title %}History{% endblock %}
+
+{% block content %}
+
+<a href="{% url 'input_client' %}" class="btn-back">
+    ← Back to Input
+</a>
+
+<h3>History</h3>
+
+{% if histories %}
+    {% for h in histories %}
+        <div class="history-card">
+
+            <div>
+                <div class="name">{{ h.nama }}</div>
+                <small>
+                    {{ h.created_at|date:"d M Y H:i" }}
+                    {{ h.results|length }} bank(s)
+                </small>
+            </div>
+
+            <div class="actions">
+                <a class="btn view" href="{% url 'history_detail' h.id %}">
+                    View
+                </a>
+
+                <a class="btn delete" href="{% url 'delete_history' h.id %}">
+                    Delete
+                </a>
+            </div>
+
+        </div>
+    {% endfor %}
+{% else %}
+    <p style="color: gray;">No history yet.</p>
+{% endif %}
+
+{% endblock %}
