@@ -21,6 +21,9 @@ def get_client_features(client):
     # SLIK
     features.append(f"SLIK_{client.status_slik}")
 
+    # FAST APPROVAL
+    features.append(f"APPROVAL_{client.instant_approval}")
+
     # FINANCE
     features.append(f"FINANCE_{client.sumber_penghasilan}")
 
@@ -75,14 +78,17 @@ def match_banks_dynamic(client):
         # =========================
         # V3: AGE vs TENOR
         # =========================
-        if client.umur:
-            umur_akhir = client.umur + client.tenor
+        if client.umur and client.tenor:
+            umur_akhir = client.umur + (client.tenor / 12)
 
-            if bank_product.max_age_end and umur_akhir > bank_product.max_age_end:
-                reasons.append(
-                    f"⚠ Umur akhir {umur_akhir} tahun melebihi batas bank ({bank_product.max_age_end})"
-                )
-                continue
+            if umur_akhir > 56:
+                return [] 
+
+            # if bank_product.max_age_end and umur_akhir > bank_product.max_age_end:
+            #     reasons.append(
+            #         f"⚠ Umur akhir {umur_akhir:.1f} tahun melebihi batas bank ({bank_product.max_age_end})"
+            #     )
+            #     continue
 
         # PLAFOND
         if bank_product.min_plafond and client.jumlah_pinjaman < bank_product.min_plafond:
@@ -213,7 +219,7 @@ def match_banks_dynamic(client):
             #         break
 
             # =========================
-            # SLIK (SKIP for perusahaan)
+            # SLIK, APPROVAL (SKIP for perusahaan)
             # =========================
             elif category == "SLIK":
 
@@ -225,7 +231,24 @@ def match_banks_dynamic(client):
 
                 slik_value = client.status_slik.lower()
 
-                if slik_value in ["kol1", "kol2", "kol3"]:
+                if slik_value in ["kol1", "kol2"]:
+                    continue
+
+                if feature not in bank_features:
+                    rejected = True
+                    break
+            
+            elif category == "APPROVAL":
+
+                if is_perusahaan:
+                    continue
+
+                if not client.instant_approval:
+                    continue
+
+                fast_approval = client.instant_approval.lower()
+                
+                if fast_approval in ["tidak"]:
                     continue
 
                 if feature not in bank_features:
@@ -263,8 +286,6 @@ def match_banks_dynamic(client):
                 # BUILD CLEAN LABEL
                 label = feature.replace("_", " ").title()
 
-                
-
                 # ADD DESCRIPTION ONLY IF EXISTS
                 if desc:
                     reasons.append(f"✔ {label} → {desc}")
@@ -280,6 +301,8 @@ def match_banks_dynamic(client):
                     score += 20
                 elif category == "SLIK":
                     score += 15
+                elif category == "APPROVAL":
+                    score += 10
                 elif category == "FINANCE":
                     score += 10
                 elif category == "COMPANY":

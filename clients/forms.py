@@ -32,11 +32,13 @@ class PeroranganForm(forms.ModelForm):
             'lama_kerja',
             'jaminan',
             'sumber_penghasilan',
+            'instant_approval',
             'status_slik',
             'join_income',
         ]
         labels = {
             'tenor': 'Tenor (bulan)',
+            'lama_kerja': 'Lama kerja / usaha (tahun)',
             'jumlah_pinjaman': 'Jumlah Pinjaman (Rp)',
         }
 

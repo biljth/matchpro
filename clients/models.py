@@ -33,7 +33,6 @@ class Client(models.Model):
     LOAN_TYPE_CHOICES = [
         ('KPR_PRIMARY', 'KPR Primary'),
         ('KPR_SECONDARY', 'KPR Secondary'),
-        ('FAST_TAKE_OVER_KPR', 'Fast / Instant Approval Take Over KPR'),
         ('MULTIGUNA', 'Multiguna / Refinancing'),
         ('TAKE_OVER_MURNI', 'Take Over Murni'),
         ('TAKE_OVER_JUAL_BELI', 'Take Over Jual Beli'),
@@ -185,6 +184,11 @@ class Client(models.Model):
         ('KOL5', 'Kol 5'),
     ]
 
+    INSTANT_APPROVAL_CHOICES = [
+        ('BISA', 'Bisa'),
+        ('Tidak', 'Tidak'),
+    ]
+
     RESTRUKTUR_CHOICES = [
         ('TIDAK', 'Tidak'),
         ('AKTIF', 'Aktif'),
@@ -193,6 +197,7 @@ class Client(models.Model):
 
     sumber_penghasilan = models.CharField(max_length=50, choices=INCOME_TYPE_CHOICES)
     status_slik = models.CharField(max_length=10, choices=SLIK_CHOICES)
+    instant_approval = models.CharField(max_length=10, choices=INSTANT_APPROVAL_CHOICES)
     # restruktur = models.CharField(max_length=10, choices=RESTRUKTUR_CHOICES)
 
     # =========================
