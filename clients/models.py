@@ -55,6 +55,7 @@ class Client(models.Model):
         ('KTA', 'Kredit Tanpa Agunan (KTA)'),
         ('KTA_ONLINE', 'KTA Online Seller'),
         ('DEPOSITO', 'Deposito Berjangka'),
+        ('ANGSURAN', 'Angsuran'),
     ]
 
     jenis_pinjaman = models.CharField(max_length=50, choices=LOAN_TYPE_CHOICES)
@@ -96,6 +97,7 @@ class Client(models.Model):
         ('YAYASAN', 'Yayasan'),
         ('PEMERINTAH', 'Pemerintah'),
         ('RUMAH_SAKIT', 'Rumah Sakit'),
+        ('PENDIDIKAN', 'Pendidikan'),
     ]
 
     # =========================
