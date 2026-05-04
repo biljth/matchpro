@@ -81,9 +81,6 @@ def match_banks_dynamic(client):
         if client.umur and client.tenor:
             umur_akhir = client.umur + (client.tenor / 12)
 
-            if umur_akhir > 56:
-                return [] 
-
             # if bank_product.max_age_end and umur_akhir > bank_product.max_age_end:
             #     reasons.append(
             #         f"⚠ Umur akhir {umur_akhir:.1f} tahun melebihi batas bank ({bank_product.max_age_end})"
