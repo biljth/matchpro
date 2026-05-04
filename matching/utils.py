@@ -231,7 +231,7 @@ def match_banks_dynamic(client):
 
                 slik_value = client.status_slik.lower()
 
-                if slik_value in ["kol1", "kol2"]:
+                if slik_value in ["-", "kol1", "kol2"]:
                     continue
 
                 if feature not in bank_features:

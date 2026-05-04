@@ -56,6 +56,7 @@ class Client(models.Model):
         ('KTA_ONLINE', 'KTA Online Seller'),
         ('DEPOSITO', 'Deposito Berjangka'),
         ('ANGSURAN', 'Angsuran'),
+        ('GADAI', 'Gadai'),
     ]
 
     jenis_pinjaman = models.CharField(max_length=50, choices=LOAN_TYPE_CHOICES)
@@ -155,6 +156,12 @@ class Client(models.Model):
         ('SK_PNS', 'SK Pegawai Negeri'),
         ('OBJEK_PEMBIAYAAN', 'Objek Pembiayaan'),
         ('SIP', 'SIP (Surat Izin Praktek)'),
+        ('BERLIAN', 'Berlian'),
+        ('EMAS', 'Emas'),
+        ('ARLOJI_MEWAH', 'Arloji Mewah'),
+        ('MOGE', 'Motor Gede'),
+        ('MATA_UANG_ASING', 'Mata Uang Asing (SGD, USD, EUR)'),
+        ('KARTU_POKEMON', 'Kartu Pokemon'),
     ]
 
     CERTIFICATE_CHOICES = [
@@ -180,6 +187,7 @@ class Client(models.Model):
     ]
 
     SLIK_CHOICES = [
+        ('-', '-'),
         ('KOL1', 'Kol 1'),
         ('KOL2', 'Kol 2'),
         ('KOL3', 'Kol 3'),
